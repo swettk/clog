@@ -10,8 +10,6 @@ share: true
 comments: true
 ---
 
-# The Modern Web
-
 # Clients, Servers, and other web hardware 	<a name="web-hardware"></a>
 
 ## Browsers (Clients) <a name="browsers"></a>

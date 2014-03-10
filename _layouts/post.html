@@ -33,6 +33,12 @@
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
+      <div class="reading_time">Read this in {{ page.content | reading_time }}</div>
+      {% if page.series == "The Modern Web" %}
+        <aside>
+        This is part of a series of posts, envisioned as a basic guide to web development and the internet in general. It's non-comprehensive, opinionated, and in many places could be just plain wrong. It's available in its <a href="modern-web">entirety</a>, or as a <a href="the-modern-web">table of contents</a>.
+        </aside>
+      {% endif %}
       {{ content }}
       <footer class="entry-meta">
         <span class="entry-tags">{% for tag in page.tags %}<a href="{{ site.url }}/tags/#{{ tag | cgi_encode }}" title="Pages tagged {{ tag }}" class="tag">{{ tag }}</a>{% unless forloop.last %}{% endunless %}{% endfor %}</span>
