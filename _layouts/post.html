@@ -8,12 +8,49 @@
 </head>
 
 <body id="post" {% if page.image.feature %}class="feature"{% endif %}>
-
+<canvas id="canvas" width="480" height="480" style="position:absolute;top:0;right:0;"></canvas>
+  <script>
+    var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var cwidth = canvas.width
+        console.log(cwidth);
+        var i = 0;
+        function animate() {
+          if (i >= cwidth) {
+            return;
+          } else {
+            for (var j = 0; j < 16; j++) {
+              l = 4 * i + j
+              k = 1.95 * l / cwidth
+              width = (cwidth / 5) * (( k / 8 ) * Math.sin(k) * Math.sin(k) + Math.sqrt(k) / 4)
+            ctx.lineWidth = 0.25
+              ctx.beginPath();
+            ctx.moveTo(cwidth, cwidth - l / 4);
+            ctx.lineTo(cwidth - width/3, cwidth - l / 4);
+            ctx.strokeStyle = "rgb(64,255,64)";
+            ctx.stroke();
+            ctx.moveTo(cwidth - width/3, cwidth - l / 4);
+            ctx.lineTo(cwidth - 2*width/3, cwidth - l / 4);
+            ctx.strokeStyle = "rgb(32,208,32)";
+            ctx.stroke();
+            ctx.moveTo(cwidth - 2*width/3, cwidth - l / 4);
+            ctx.lineTo(cwidth - width, cwidth - l / 4);
+            ctx.strokeStyle = "rgb(0,160,0)";
+            ctx.stroke();
+        }
+          i += 4
+          requestAnimationFrame(animate)
+      }
+        }
+        
+      requestAnimationFrame(animate)
+  </script>
 {% include browser-upgrade.html %}
 {% include navigation.html %}
 
 {% if page.image.feature %}
 <div class="entry-header">
+
   <div class="entry-image"><img src="{{ site.url }}/images/{{ page.image.feature }}" alt="{{ page.title }}">
     {% if page.image.credit %}<div class="image-credit">{% if page.image.text %}{{ page.image.text }}{% endif %}<a href="{{ page.image.creditlink }}">{{ page.image.credit }}</a></div><!-- /.image-credit -->{% endif %}
   </div><!-- /.entry-image -->
