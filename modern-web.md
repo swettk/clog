@@ -539,7 +539,7 @@ Compared to:
 	}
 ~~~ 
 
-There are **looads** of different frameworks, and most of them are great. A lot of them do the same things. jQuery is a great one, providing a hugely solid base foundation for web programming.
+There are **loads** of different frameworks, and most of them are great. A lot of them do the same things. jQuery is a great one, providing a hugely solid base foundation for web programming.
 
 # AJAX: Asynchronous JavaScript and XML <a name="ajax"></a>
 

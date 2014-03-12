@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body,
+html,
+canvas {
+	margin:0;
+}	
+body {
+	background-color: black;
+}
+</style>
+</head>
+<body>
+	<canvas id="src-canvas" height="8"></canvas>
+	<canvas id="canvas" width="480" height="480" style="position:absolute;top:0;right:0;"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var cwidth = canvas.width
+        console.log(cwidth);
+        var i = 0;
+        function animate() {
+        	if (i >= cwidth) {
+        		return;
+        	} else {
+        		for (var j = 0; j < 16; j++) {
+        			l = 4 * i + j
+		        	k = 1.95 * l / cwidth
+		        	width = (cwidth / 5) * (( k / 8 ) * Math.sin(k) * Math.sin(k) + Math.sqrt(k) / 4)
+				    ctx.lineWidth = 0.25
+			        ctx.beginPath();
+				    ctx.moveTo(cwidth, cwidth - l / 4);
+				    ctx.lineTo(cwidth - width/3, cwidth - l / 4);
+				    ctx.strokeStyle = "rgb(64,255,64)";
+				    ctx.stroke();
+				    ctx.moveTo(cwidth - width/3, cwidth - l / 4);
+				    ctx.lineTo(cwidth - 2*width/3, cwidth - l / 4);
+				    ctx.strokeStyle = "rgb(32,208,32)";
+				    ctx.stroke();
+				    ctx.moveTo(cwidth - 2*width/3, cwidth - l / 4);
+				    ctx.lineTo(cwidth - width, cwidth - l / 4);
+				    ctx.strokeStyle = "rgb(0,160,0)";
+				    ctx.stroke();
+				}
+			    i += 4
+		    	requestAnimationFrame(animate)
+			}
+        }
+        
+    	requestAnimationFrame(animate)
+	</script>
+	<!--script>
+		var canvas = document.getElementById('src-canvas');
+	    var context = canvas.getContext('2d');
+	    var s = canvas.height
+	    canvas.width = s*3
+
+	    context.beginPath();
+	    context.moveTo(s/2, 0);
+	    context.lineTo(s/2, s-1);
+	    context.lineWidth = s
+	    context.strokeStyle = "rgb(128,255,128)";
+	    context.stroke();
+
+	    context.beginPath();
+	    context.moveTo(1.5*s, 0);
+	    context.lineTo(1.5*s, s-1);
+	    context.lineWidth = s
+	    context.strokeStyle = "rgb(64,192,64)";
+	    context.stroke();
+
+	    context.beginPath();
+	    context.moveTo(2.5*s, 0);
+	    context.lineTo(2.5*s, s-1);
+	    context.lineWidth = s
+	    context.strokeStyle = "rgb(0,128,0)";
+	    context.stroke();
+
+	    var dataURL = canvas.toDataURL();
+	    // console.log(dataURL);
+	    var imageObj = new Image();
+        imageObj.src = dataURL;
+
+        var realCanvas = document.getElementById('real-canvas')
+        var ctx = realCanvas.getContext('2d')
+
+        keystoneAndDisplayImage(ctx, imageObj, 0, 0, 480, 480/s)
+
+		function keystoneAndDisplayImage(ctx, img, x, y, pixelWidth, 
+									 scalingFactor) {
+			var h = img.height,
+			    w = img.width,
+	        
+		    // The number of slices to draw.
+		    numSlices = Math.abs(scalingFactor*h),
+		    // The height of each source slice.
+		    sliceHeight = h / numSlices,
+		    // Whether to draw the slices in reverse order or not.
+		    polarity = (pixelWidth > 0) ? 1 : -1,
+		    // How much should we scale the width of the slice 
+		    // before drawing?
+		    widthScale = Math.abs(pixelWidth) / w
+		    // How much should we scale the height of the slice 
+		    // before drawing? 
+		    heightScale = (1 - scalingFactor) / numSlices;
+
+			console.log("numSlices: "+numSlices);
+			console.log("sliceHeight: "+sliceHeight);
+			console.log("polarity: "+polarity);
+			console.log("widthScale: "+widthScale);
+			console.log("heightScale: "+heightScale);
+		    for(var n = 0; n < numSlices; n++) {
+
+				// Source: where to take the slice from.
+				var sy = sliceHeight * n,
+				    sx = 0,
+				    sWidth = w,
+				    sHeight = sliceHeight
+				// (x/5)*(sin(x))*(sin(x)) +(x^0.5)/4
+				// Destination: where to draw the slice to 
+				// (the transformation happens here).
+				var dy = pixelWidth - (y + ((sliceHeight * scalingFactor * n))),
+				    dWidth = ( n / 5 ) * Math.sin(n) * Math.sin(n) + Math.sqrt(n) / 4,
+					dx = pixelWidth - dWidth;
+				    dHeight = sliceHeight * scalingFactor;
+					console.log("n: "+n);
+					console.log("sx: "+sx);
+				    console.log("sy: "+sy);
+				    console.log("sWidth: "+sWidth);
+				    console.log("sHeight: "+sHeight);
+					console.log("dx: "+dx);
+				    console.log("dy: "+dy);
+				    console.log("dWidth: "+dWidth);
+				    console.log("dHeight: "+dHeight);
+				    // console.log(img + " " + sx + " " + sy + " " + sWidth + " " + sHeight + " " + dx + " " + dy + " " + dWidth + " " + dHeight);
+				ctx.drawImage(img, sx, sy, sWidth, sHeight, 
+		        			  dx, dy, dWidth, dHeight);
+			}
+		}
+	</script-->
+</body>
