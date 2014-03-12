@@ -2,8 +2,7 @@ title:            Clov3rly
 description:      Abstracts and Articles
 disqus_shortname: clov3rly
 #Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://localhost:4000
-#http://clov3r.us/blog
+url:              #http://clov3r.us/blog
 
 # Owner/author information
 owner:
