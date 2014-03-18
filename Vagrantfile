@@ -1,0 +1,1 @@
+config.vm.network "forwarded_port", guest: 80, host: 8000
